@@ -16,14 +16,15 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY === 0) {
-        setIsTopOfPage(true);
-        setSelectedPage(SelectedPage.Home);
+      if (window.scrollY !== 0) {
+        setIsTopOfPage(false);
+        return;
       }
-      setIsTopOfPage(false);
-      window.addEventListener('scroll', handleScroll);
-      return () => window.removeEventListener('scroll', handleScroll);
+      setIsTopOfPage(true);
+      setSelectedPage(SelectedPage.Home);
     };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
